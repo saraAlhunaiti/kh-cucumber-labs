@@ -10,7 +10,7 @@ public class MyAccountPage  {
     }
 
     public boolean isCurrent() {
-        return "My Store".equals(driver.getTitle());
+        return "My account - My Store".equals(driver.getTitle());
     }
 
 }
