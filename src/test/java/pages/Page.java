@@ -21,7 +21,7 @@ public abstract class Page {
     private final WebDriver driver;
     private String title;
 
-    protected Page(WebDriver driver, String title) {
+    public Page(WebDriver driver, String title) {
         this.driver = driver;
         this.title = title;
     }
@@ -39,14 +39,19 @@ public abstract class Page {
         driver.findElement(By.cssSelector(path)).click();
     }
 
-    protected String getText(String cssPath) {
-        return driver.findElement(By.xpath(cssPath)).getText();
+    protected String getText(String xPath) {
+        return driver.findElement(By.xpath(xPath)).getText();
     }
 
-    protected void fill(String id, String value) {
+    protected WebElement fill(String id, String value) {
         final WebElement element = waitFor(id);
         element.clear();
         element.sendKeys(value);
+        return element;
+    }
+
+    protected void fillAndSubmit(String id, String value) {
+        fill(id, value).submit();
     }
 
     protected void selectFirst(String id) {

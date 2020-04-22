@@ -14,7 +14,7 @@ import pages.RegistrationPage;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class AutomationPracticeSteps {
+public class RegisterSteps {
 
     private final WebDriver driver = new ChromeDriver();
     private final User user = new User();
