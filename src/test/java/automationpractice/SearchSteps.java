@@ -24,7 +24,7 @@ public class SearchSteps {
     private AuthenticationPage authenticationPage;
     private RegistrationPage registrationPage;
     private MyAccountPage myAccountPage;
-    private SearchPage searchPage ;
+    private SearchPage searchPage;
 
     private Map<String, Integer> stockLevels;
 

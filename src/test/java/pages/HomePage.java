@@ -11,10 +11,9 @@ import static org.openqa.selenium.support.PageFactory.initElements;
 import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
 
 public class HomePage {
-    private static WebDriver driver;
     public static final String PATH_SIGN_IN = "#header > div.nav > div > div > nav > div.header_user_info > a";
     private static final String URL = "http://automationpractice.com";
-
+    private static WebDriver driver;
     @FindBy(how = CSS, using = PATH_SIGN_IN)
     private WebElement signIn;
 
