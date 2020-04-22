@@ -20,21 +20,39 @@ import static org.junit.Assert.assertTrue;
 public class SearchSteps {
     private final WebDriver driver = new ChromeDriver();
     private final User user = new User();
-    private final HomePage homepage = new HomePage(driver);
-    private final AuthenticationPage authenticationPage = new AuthenticationPage(driver, user);
-    private final RegistrationPage registrationPage = new RegistrationPage(driver, user);
-    private final MyAccountPage myAccountPage = new MyAccountPage(driver);
-    private final SearchPage searchPage = new SearchPage(driver);
+    private HomePage homepage;
+    private AuthenticationPage authenticationPage;
+    private RegistrationPage registrationPage;
+    private MyAccountPage myAccountPage;
+    private SearchPage searchPage ;
 
     private Map<String, Integer> stockLevels;
 
     @Given("^I am authenticated$")
     public void authenticate() {
+        homepage = new HomePage(driver);
         homepage.home();
         homepage.signIn();
+        authenticationPage = new AuthenticationPage(driver, user);
         authenticationPage.createAnAccount();
+
+        sleep(3000);
+
+        registrationPage = new RegistrationPage(driver, user);
         registrationPage.fillInForm();
+
+        sleep(3000);
+
+        myAccountPage = new MyAccountPage(driver);
         assertTrue(myAccountPage.isCurrent());
+    }
+
+    private void sleep(int millis) {
+        try {
+            Thread.sleep(millis);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @And("^the current stock levels are$")
@@ -44,6 +62,7 @@ public class SearchSteps {
 
     @When("^I search for (-?.+)$")
     public void searchForItem(String item) {
+        searchPage = new SearchPage(driver);
         searchPage.search(item);
     }
 

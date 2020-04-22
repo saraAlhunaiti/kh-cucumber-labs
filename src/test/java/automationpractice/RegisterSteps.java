@@ -18,13 +18,14 @@ public class RegisterSteps {
 
     private final WebDriver driver = new ChromeDriver();
     private final User user = new User();
-    private final HomePage homepage = new HomePage(driver);
-    private final AuthenticationPage authenticationPage = new AuthenticationPage(driver, user);
-    private final RegistrationPage registrationPage = new RegistrationPage(driver, user);
-    private final MyAccountPage myAccountPage = new MyAccountPage(driver);
+    private HomePage homepage;
+    private AuthenticationPage authenticationPage;
+    private RegistrationPage registrationPage;
+    private MyAccountPage myAccountPage;
 
     @Given("I am on the homepage")
     public void iAmOnTheHomepage() {
+        homepage = new HomePage(driver);
         homepage.home();
         assertTrue(homepage.isCurrent());
     }
@@ -36,27 +37,35 @@ public class RegisterSteps {
 
     @And("enter an email address to create an account")
     public void enterAnEmailAddressToCreateAnAccount() {
+        authenticationPage = new AuthenticationPage(driver, user);
         assertTrue(authenticationPage.isCurrent());
         authenticationPage.createAnAccount();
     }
 
     @And("I fill in the registration form")
     public void iFillInTheRegistrationForm() {
+        registrationPage = new RegistrationPage(driver, user);
         registrationPage.fillInForm();
     }
 
     @Then("I am registered and logged in")
     public void iAmRegisteredAndLoggedIn() {
+        myAccountPage = new MyAccountPage(driver);
         assertTrue(myAccountPage.isCurrent());
     }
 
     @And("try to create account without filling in the form")
     public void tryToCreateAccountWithoutFillingInTheForm() {
+        registrationPage = new RegistrationPage(driver, user);
         registrationPage.submit();
     }
 
     @Then("I will get an error")
     public void iWillGetAnError() {
         assertEquals(8, registrationPage.getErrorCount());
+    }
+
+    public boolean isCurrent() {
+        return "My Store".equals(driver.getTitle());
     }
 }

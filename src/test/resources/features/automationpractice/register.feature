@@ -1,3 +1,4 @@
+@wip
 Feature: Registration
   As a new user
   I want to register with automationpractice.com

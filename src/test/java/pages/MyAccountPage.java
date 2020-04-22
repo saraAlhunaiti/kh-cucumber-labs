@@ -2,10 +2,15 @@ package pages;
 
 import org.openqa.selenium.WebDriver;
 
-public class MyAccountPage extends Page {
+public class MyAccountPage  {
+    private final WebDriver driver;
 
     public MyAccountPage(WebDriver driver) {
-        super(driver, "My account - My Store");
+        this.driver = driver;
+    }
+
+    public boolean isCurrent() {
+        return "My Store".equals(driver.getTitle());
     }
 
 }
