@@ -8,4 +8,8 @@ public class MyAccountPage extends Page {
         super(driver, "My account - My Store");
     }
 
+    public void signOut(){
+        cssClick("#header > div.nav > div > div > nav > div:nth-child(2) > a");
+    }
+
 }
